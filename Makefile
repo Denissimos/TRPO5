@@ -1,6 +1,6 @@
 INCLUDES = -I src/ -I thirdparty/
 
-all: ./bin/main ./bin/test
+all: ./bin/main ./bin/test testo
 
 ./bin/main: dirs ./obj/main.o ./obj/root.o 
 	gcc ./obj/main.o ./obj/root.o -Wall -o ./bin/main -lm
@@ -11,6 +11,9 @@ all: ./bin/main ./bin/test
 dirs:
 	mkdir obj
 	mkdir bin
+
+testo:
+	./bin/test
 
 ./obj/main.o: ./src/main.c
 	gcc -c ./src/main.c -Wall -o ./obj/main.o $(INCLUDES)
