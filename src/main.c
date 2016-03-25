@@ -1,22 +1,22 @@
 #include <stdio.h>
+#include <root.h>
 #include <math.h>
 
 int main()
 {
-	int a;
-	int b;
-	int c;
+	float a;
+	float b;
+	float c;
 	float x1;
 	float x2;
 	float d;
+	int roots;
 
 	printf("Input your A, B, C for equation\n");
-	scanf("%d %d %d", &a, &b, &c);
+	scanf("%f %f %f", &a, &b, &c);
 
-	d = discriminant(a, b, c);
+	d = solve(a, b, c, &x1, &x2, &roots);
 	if (d >= 0) {
-		x1 = firstroot(b, a, d);
-		x2 = secondroot(b, a, d);
 		printf("Roots of the equation: %.2f & %.2f\n", x1, x2);
 	}
 	else
