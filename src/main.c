@@ -4,15 +4,15 @@
 
 int main()
 {
-	int a;
-	int b;
-	int c;
+	float a;
+	float b;
+	float c;
 	float x1;
 	float x2;
 	float d;
 
 	printf("Input your A, B, C for equation\n");
-	scanf("%d %d %d", &a, &b, &c);
+	scanf("%f %f %f", &a, &b, &c);
 
 	d = solve(a, b, c, &x1, &x2);
 	if (d >= 0) {

@@ -2,6 +2,6 @@
 #define ROOT_H
 #include <math.h>
 
-double solve(int a, int b, int c, float* x1, float* x2);
+float solve(float a, float b, float c, float* x1, float* x2);
 
 #endif
