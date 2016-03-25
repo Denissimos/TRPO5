@@ -1,14 +1,15 @@
 INCLUDES = -I src/ -I thirdparty/
+dirs = ./bin ./obj
 
 all: ./bin/main ./bin/test testo
 
-./bin/main: dirs ./obj/main.o ./obj/root.o 
+./bin/main: $(dirs) ./obj/main.o ./obj/root.o 
 	gcc ./obj/main.o ./obj/root.o -Wall -o ./bin/main -lm
 
-./bin/test: dirs ./obj/main_test.o ./obj/root.o  ./obj/root_test.o
+./bin/test: $(dirs) ./obj/main_test.o ./obj/root.o  ./obj/root_test.o
 	gcc ./obj/main_test.o ./obj/root.o ./obj/root_test.o -Wall -o ./bin/test -lm
 
-dirs:
+$(dirs):
 	mkdir obj
 	mkdir bin
 
