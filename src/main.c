@@ -10,11 +10,12 @@ int main()
 	float x1;
 	float x2;
 	float d;
+	int roots;
 
 	printf("Input your A, B, C for equation\n");
 	scanf("%f %f %f", &a, &b, &c);
 
-	d = solve(a, b, c, &x1, &x2);
+	d = solve(a, b, c, &x1, &x2, &roots);
 	if (d >= 0) {
 		printf("Roots of the equation: %.2f & %.2f\n", x1, x2);
 	}
