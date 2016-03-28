@@ -39,9 +39,13 @@ CTEST(quadratic_equation_suite, two_roots_test) {
     // Then
     const int expected_roots = 2;
     const float expected_dicriminant = 1002.4;
+    const float expected_x1 = -0.031416556251127374;
+    const float expected_x2 = -5.894509369674798;
 
     ASSERT_DBL_NEAR(expected_dicriminant, discriminant);
     ASSERT_DBL_NEAR(expected_roots, roots);
+    ASSERT_DBL_NEAR(expected_x1, x1);
+    ASSERT_DBL_NEAR(expected_x2, x2);
 }
 
 CTEST(quadratic_equation_suite, one_root_test) {
@@ -59,9 +63,11 @@ CTEST(quadratic_equation_suite, one_root_test) {
     // Then
     const int expected_roots = 1;
     const float expected_dicriminant = 0;
+    const float expected_x1 = 4;
 
     ASSERT_DBL_NEAR(expected_dicriminant, discriminant);
     ASSERT_DBL_NEAR(expected_roots, roots);
+    ASSERT_DBL_NEAR(expected_x1, x1);
 }
 
 CTEST(quadratic_equation_suite, negative_discriminant_test) {
@@ -82,4 +88,23 @@ CTEST(quadratic_equation_suite, negative_discriminant_test) {
 
     ASSERT_DBL_NEAR(expected_roots, roots);
     ASSERT_DBL_NEAR(expected_dicriminant, discriminant);
+}
+
+CTEST(quadratic_equation_suite, non_quadratic_test) {
+    // Given
+    const float a = 0;
+    const float b = 1;
+    const float c = 4;
+
+    // When
+    float x1;
+    float x2;
+    int roots;
+    float discriminant = solve(a, b, c, &x1, &x2, &roots);
+
+    // Then
+    const int expected_roots = 0;
+
+    ASSERT_DBL_NEAR(expected_roots, roots);
+
 }
