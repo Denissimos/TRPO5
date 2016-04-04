@@ -1,7 +1,12 @@
 #ifndef ROOT_H
 #define ROOT_H
-#include <math.h>
 
-float solve(float a, float b, float c, float* x1, float* x2, int* roots_num);
+typedef struct {
+	float x1;
+	float x2;
+	float discriminant;
+} Roots;
+
+Roots solve(float a, float b, float c, int *status);
 
 #endif
