@@ -64,3 +64,20 @@ CTEST(quadratic_equation_suite, negative_discriminant_test) {
     ASSERT_DBL_NEAR(expected_status, status);
     ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
 }
+
+CTEST(quadratic_equation_suite, non_quadratic_test) {
+    // Given
+    const float a = 0;
+    const float b = 1;
+    const float c = 4;
+
+    // When
+    Roots answer;
+    int status;
+    answer = solve(a, b, c, &status);
+
+    // Then
+    const int expected_status = -1;
+
+    ASSERT_DBL_NEAR(expected_status, status);
+}
