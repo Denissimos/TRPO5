@@ -44,4 +44,23 @@ CTEST(quadratic_equation_suite, two_roots_test) {
     ASSERT_DBL_NEAR(expected_answer.x2, answer.x2);
 }
 
+CTEST(quadratic_equation_suite, negative_discriminant_test) {
+    // Given
+    const float a = 4;
+    const float b = 1;
+    const float c = 4;
 
+    // When
+    Roots answer;
+    int status;
+    answer = solve(a, b, c, &status);
+
+
+    // Then
+    const int expected_status = 0;
+    const Roots expected_answer = {0, 0, -63};//как задать в константной структуре только 1 параметр?
+
+
+    ASSERT_DBL_NEAR(expected_status, status);
+    ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
+}
