@@ -3,17 +3,23 @@
 
 Roots solve(float a, float b, float c, int *status)
 {
+	const int NO_ROOTS = 0;
 	const int ONE_ROOT = 1;
 	const int TWO_ROOTS = 2;
 	const int INVALID_INPUT = -1;
 	Roots answer;
 
+	answer.discriminant = b * b - 4 * a * c;
+
 	if (a == 0) {
 		*status = INVALID_INPUT;
 		return answer;
 	}
-
-	answer.discriminant = b * b - 4 * a * c;
+	else if (answer.discriminant < 0) {
+		*status = NO_ROOTS;
+		return answer;
+	}
+	
 	if (answer.discriminant == 0)
 		*status = ONE_ROOT;
 	else 

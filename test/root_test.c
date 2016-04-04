@@ -43,3 +43,5 @@ CTEST(quadratic_equation_suite, two_roots_test) {
     ASSERT_DBL_NEAR(expected_answer.x1, answer.x1);
     ASSERT_DBL_NEAR(expected_answer.x2, answer.x2);
 }
+
+
