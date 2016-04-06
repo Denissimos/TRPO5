@@ -1,21 +1,31 @@
 #include <root.h>
 #include <math.h>
 
-float solve(float a, float b, float c, float* x1, float* x2, int* roots_num)
+Roots solve(float a, float b, float c, int *status)
 {
-	float d;
-	int roots = 0;
+	const int NO_ROOTS = 0;
+	const int ONE_ROOT = 1;
+	const int TWO_ROOTS = 2;
+	const int INVALID_INPUT = -1;
+	Roots answer;
 
-	d = b * b - 4 * a * c;
+	answer.discriminant = b * b - 4 * a * c;
+
+	if (a == 0) {
+		*status = INVALID_INPUT;
+		return answer;
+	}
+	else if (answer.discriminant < 0) {
+		*status = NO_ROOTS;
+		return answer;
+	}
 	
-	if (d > 0)
-		roots = 2;
-	else if (d == 0) 
-		roots = 1;
+	if (answer.discriminant == 0)
+		*status = ONE_ROOT;
+	else 
+		*status = TWO_ROOTS;
+	answer.x1 = (-b + sqrt(answer.discriminant)) / (2 * a);
+	answer.x2 = (-b - sqrt(answer.discriminant)) / (2 * a);
 
-	*x1 = (-b + sqrt(d)) / (2 * a);
-	*x2 = (-b - sqrt(d)) / (2 * a);
-	*roots_num = roots;
-
-	return d;
+	return answer;
 }

@@ -7,21 +7,19 @@ CTEST(quadratic_equation_suite, discriminant_test) {
     const float a = 1;
     const float b = 2;
     const float c = 1;
-
+    
     // When
-    float x1;
-    float x2;
-    int roots;
-    float discriminant = solve(a, b, c, &x1, &x2, &roots);
+    Roots answer;
+    int status;
+    answer = solve(a, b, c, &status);
 
     // Then
-    const float expected_dicriminant = 0;
-    const float expected_x1 = -1;
-    const float expected_x2 = -1;
+    const Roots expected_answer = {-1, -1, 0};
+    const int expected_status = 1;
 
-    ASSERT_DBL_NEAR(expected_dicriminant, discriminant);
-    ASSERT_DBL_NEAR(expected_x1, x1);
-    ASSERT_DBL_NEAR(expected_x2, x2);
+    ASSERT_DBL_NEAR(expected_answer.x1, answer.x1);
+    ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
+    ASSERT_DBL_NEAR(expected_status, status);
 }
 
 CTEST(quadratic_equation_suite, two_roots_test) {
@@ -31,37 +29,19 @@ CTEST(quadratic_equation_suite, two_roots_test) {
     const float c = 1;
 
     // When
-    float x1;
-    float x2;
-    int roots;
-    float discriminant = solve(a, b, c, &x1, &x2, &roots);
+
+    Roots answer;
+    int status;
+    answer = solve(a, b, c, &status);
 
     // Then
-    const int expected_roots = 2;
-    const float expected_dicriminant = 1002.4;
+    const int expected_status = 2;
+    const Roots expected_answer = {-0.031416556251127374, -5.894509369674798, 1002.4};
 
-    ASSERT_DBL_NEAR(expected_dicriminant, discriminant);
-    ASSERT_DBL_NEAR(expected_roots, roots);
-}
-
-CTEST(quadratic_equation_suite, one_root_test) {
-    // Given
-    const float a = 2;
-    const float b = -16;
-    const float c = 32;
-
-    // When
-    float x1;
-    float x2;
-    int roots;
-    float discriminant = solve(a, b, c, &x1, &x2, &roots);
-
-    // Then
-    const int expected_roots = 1;
-    const float expected_dicriminant = 0;
-
-    ASSERT_DBL_NEAR(expected_dicriminant, discriminant);
-    ASSERT_DBL_NEAR(expected_roots, roots);
+    ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
+    ASSERT_DBL_NEAR(expected_status, status);
+    ASSERT_DBL_NEAR(expected_answer.x1, answer.x1);
+    ASSERT_DBL_NEAR(expected_answer.x2, answer.x2);
 }
 
 CTEST(quadratic_equation_suite, negative_discriminant_test) {
@@ -71,15 +51,33 @@ CTEST(quadratic_equation_suite, negative_discriminant_test) {
     const float c = 4;
 
     // When
-    float x1;
-    float x2;
-    int roots;
-    float discriminant = solve(a, b, c, &x1, &x2, &roots);
+    Roots answer;
+    int status;
+    answer = solve(a, b, c, &status);
+
 
     // Then
-    const float expected_dicriminant = -63;
-    const int expected_roots = 0;
+    const int expected_status = 0;
+    const Roots expected_answer = {0, 0, -63};//как задать в константной структуре только 1 параметр?
 
-    ASSERT_DBL_NEAR(expected_roots, roots);
-    ASSERT_DBL_NEAR(expected_dicriminant, discriminant);
+
+    ASSERT_DBL_NEAR(expected_status, status);
+    ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
+}
+
+CTEST(quadratic_equation_suite, non_quadratic_test) {
+    // Given
+    const float a = 0;
+    const float b = 1;
+    const float c = 4;
+
+    // When
+    Roots answer;
+    int status;
+    answer = solve(a, b, c, &status);
+
+    // Then
+    const int expected_status = -1;
+
+    ASSERT_DBL_NEAR(expected_status, status);
 }
