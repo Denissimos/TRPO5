@@ -1,6 +1,10 @@
 #include <ctest.h>
-
 #include <root.h>
+
+const int TWO_ROOTS = 2;
+const int ONE_ROOT = 1;
+const int NO_ROOTS = 0;
+const int INVALID_INPUT = -1;
 
 CTEST(quadratic_equation_suite, discriminant_test) {
     // Given
@@ -15,7 +19,7 @@ CTEST(quadratic_equation_suite, discriminant_test) {
 
     // Then
     const Roots expected_answer = {-1, -1, 0};
-    const int expected_status = 1;
+    const int expected_status = ONE_ROOT;
 
     ASSERT_DBL_NEAR(expected_answer.x1, answer.x1);
     ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
@@ -35,7 +39,7 @@ CTEST(quadratic_equation_suite, two_roots_test) {
     answer = solve(a, b, c, &status);
 
     // Then
-    const int expected_status = 2;
+    const int expected_status = TWO_ROOTS;
     const Roots expected_answer = {-0.031416556251127374, -5.894509369674798, 1002.4};
 
     ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
@@ -57,8 +61,8 @@ CTEST(quadratic_equation_suite, negative_discriminant_test) {
 
 
     // Then
-    const int expected_status = 0;
-    const Roots expected_answer = {0, 0, -63};//как задать в константной структуре только 1 параметр?
+    const int expected_status = NO_ROOTS;
+    const Roots expected_answer = {0, 0, -63};
 
 
     ASSERT_DBL_NEAR(expected_status, status);
@@ -77,7 +81,9 @@ CTEST(quadratic_equation_suite, non_quadratic_test) {
     answer = solve(a, b, c, &status);
 
     // Then
-    const int expected_status = -1;
+    const int expected_status = INVALID_INPUT;
+    //const Roots expected_answer;
 
     ASSERT_DBL_NEAR(expected_status, status);
+    //ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
 }
