@@ -1,10 +1,7 @@
 #include <ctest.h>
 #include <root.h>
 
-const int TWO_ROOTS = 2;
-const int ONE_ROOT = 1;
-const int NO_ROOTS = 0;
-const int INVALID_INPUT = -1;
+#define UNUSED(x) (void)(x)
 
 CTEST(quadratic_equation_suite, discriminant_test) {
     // Given
@@ -62,11 +59,10 @@ CTEST(quadratic_equation_suite, negative_discriminant_test) {
 
     // Then
     const int expected_status = NO_ROOTS;
-    const Roots expected_answer = {0, 0, -63};
+    const Roots expected_answer = {.discriminant = -63};
 
-
-    ASSERT_DBL_NEAR(expected_status, status);
     ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
+    ASSERT_DBL_NEAR(expected_status, status);    
 }
 
 CTEST(quadratic_equation_suite, non_quadratic_test) {
@@ -79,11 +75,10 @@ CTEST(quadratic_equation_suite, non_quadratic_test) {
     Roots answer;
     int status;
     answer = solve(a, b, c, &status);
-
+    UNUSED(answer);
+    
     // Then
     const int expected_status = INVALID_INPUT;
-    //const Roots expected_answer;
 
     ASSERT_DBL_NEAR(expected_status, status);
-    //ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
 }
