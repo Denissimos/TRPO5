@@ -1,6 +1,8 @@
 #include <ctest.h>
 #include <root.h>
 
+#define UNUSED(x) (void)(x)
+
 CTEST(quadratic_equation_suite, discriminant_test) {
     // Given
     const float a = 1;
@@ -73,11 +75,10 @@ CTEST(quadratic_equation_suite, non_quadratic_test) {
     Roots answer;
     int status;
     answer = solve(a, b, c, &status);
-
+    UNUSED(answer);
+    
     // Then
     const int expected_status = INVALID_INPUT;
-    //const Roots expected_answer;
 
     ASSERT_DBL_NEAR(expected_status, status);
-    //ASSERT_DBL_NEAR(expected_answer.discriminant, answer.discriminant);
 }
